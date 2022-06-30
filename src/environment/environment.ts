@@ -29,6 +29,7 @@ export class Environemnt {
     this.ground.update(currentWeather);
     const speed = this.hero.update(currentWeather);
     this.obstacles.forEach((obstacle) => obstacle.update(speed));
+    if()
     this.addObstacles();
   }
 
