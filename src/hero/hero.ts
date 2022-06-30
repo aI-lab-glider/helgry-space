@@ -1,61 +1,76 @@
 import { Vector2D } from "../utils/vector";
 import { Weather } from "../weather/weather";
 import "p5";
-import { Environemnt } from "../environment/environment";
+import { Vector } from "p5";
+
+class Inventory {
+  coins: number;
+  guns;
+}
 
 export class Hero {
-  //private sprite;
-  public position: Vector2D;
-
+  isHoldingGun: boolean;
+  position: Vector2D;
+  speed: Vector2D = new Vector2D(0, 0);
+  lookaheadRange: number;
+  inventory: Inventory;
+  jumpspeed: Vector2D = new Vector2D(0, 0);
   constructor(x: number, y: number) {
-    // this.sprite = createSprite(x, y);
-    // const animation = loadAnimation(
-    //   "data/hero1.jpg",
-    //   "data/hero2.jpg",
-    //   "data/hero3.jpg",
-    //   "data/hero4.jpg"
-    // );
-    // this.sprite.addAnimation("hero", animation);
-
     this.position = new Vector2D(x, y);
   }
 
-  public move(speed: Vector2D) {
-    this.position = this.position.add(speed);
-    if (this.position.x > Environemnt.worldSizeX) {
-      this.position.x = 0;
-    }
-    if (this.position.x < 0) {
-      this.position.x = Environemnt.worldSizeX;
+  update(currentWeather: Weather) {
+    /**
+     * 1 -  update speed based on weather
+     * correct speed based on pressed key
+     * add speed to position
+     */
+    this.calculateSpeedBasedOnWeather(currentWeather);
+    this.calculateSpeedBasedOnKeyPressed();
+    //this.position = this.position.add(this.speed);
+    return this.speed;
+  }
+
+  calculateSpeedBasedOnWeather(currentWeather: Weather) {
+    if (currentWeather.precipitation.isPresent() && this.speed.x !== 0) {
+      this.speed = this.speed.add(new Vector2D(0, 0));
+    } else {
+      this.speed = this.speed.add(new Vector2D(0, 0));
     }
   }
 
-  public jump() { }
-
-  public pickUp() { }
-
-  public update(weather: Weather) {
-    const speed = this.handleKeyDown();
-    // this.move(speed);
-    return speed;
-  }
-
-  public handleKeyDown() {
-    if (keyIsDown(LEFT_ARROW)) {
-      return new Vector2D(-5, 0);
-    }
+  calculateSpeedBasedOnKeyPressed() {
     if (keyIsDown(RIGHT_ARROW)) {
-      return new Vector2D(5, 0);
+      this.speed = new Vector2D(0, 0);
+      this.speed = this.speed.add(new Vector2D(5, 0));
+    } else if (keyIsDown(LEFT_ARROW)) {
+      this.speed = new Vector2D(0, 0);
+      this.speed = this.speed.add(new Vector2D(-5, 0));
+    } else {
+      this.speed = new Vector2D(0, 0);
     }
-    return new Vector2D(0, 0);
   }
 
-  // animate() {
-  //   this.sprite.animation.play();
-  // }
-
-  public draw() {
+  draw() {
     fill("blue");
-    rect(this.position.x, this.position.y, 5, 10);
+    rect(this.position.x, this.position.y, 30, 30);
+  }
+  jump(){
+    frameRate(50)
+    this.position = this.position.add(this.jumpspeed);
+    if (keyIsDown(32) && this.position.y > 250) {
+      this.jumpspeed = new Vector2D(0, 0);
+      this.jumpspeed = this.jumpspeed.add(new Vector2D(0, -50));
+    } 
+    else if (this.position.y === 350) {
+      this.jumpspeed = new Vector2D(0, 0);
+    } 
+    else if(keyIsDown(32) && this.position.y != 350){
+      this.jumpspeed = new Vector2D(0, 0);
+    }
+    else {
+      this.jumpspeed = new Vector2D(0, 0);
+      this.jumpspeed = this.jumpspeed.add(new Vector2D(0, 10));
+    }
   }
 }
