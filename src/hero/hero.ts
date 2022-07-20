@@ -1,22 +1,22 @@
 import { Vector2D } from "../utils/vector";
 import { Weather } from "../weather/weather";
 import "p5";
-import { Vector } from "p5";
+import { Environemnt } from "../environment/environment";
+import { Obstacle } from "../obstacle/obstacle";
 
-class Inventory {
-  coins: number;
-  guns;
-}
 
 export class Hero {
-  position: Vector2D;
-  speed: Vector2D = new Vector2D(0, 0);
-  inventory: Inventory;
+  //private sprite;
   jumpspeed: Vector2D = new Vector2D(0, 0);
+  speed: Vector2D = new Vector2D(0, 0);
+  public position: Vector2D;
+  public isCollision: boolean;
+  public sizeX = 5;
+  public sizeY = 10
   constructor(x: number, y: number) {
     this.position = new Vector2D(x, y);
   }
-
+  public obstacle: Obstacle
   update(currentWeather: Weather) {
     /**
      * 1 -  update speed based on weather
@@ -45,6 +45,31 @@ export class Hero {
       this.speed = this.speed.add(new Vector2D(-5, 0));
     }
   }
+  public move(speed: Vector2D) {
+    this.position = this.position.add(speed);
+    if (this.position.x > Environemnt.worldSizeX) {
+      this.position.x = 0;
+    }
+    if (this.position.x < 0) {
+      this.position.x = Environemnt.worldSizeX;
+    }
+  }
+
+
+
+  public pickUp() { }
+
+
+  public handleKeyDown() {
+    if (keyIsDown(LEFT_ARROW)) {
+      return new Vector2D(-5, 0);
+    }
+    if (keyIsDown(RIGHT_ARROW)) {
+      this.speed = this.speed.add(new Vector2D(5, 0));
+    } else if (keyIsDown(LEFT_ARROW)) {
+      this.speed = this.speed.add(new Vector2D(-5, 0));
+    }
+  }
 
   draw() {
     fill("blue");
@@ -64,5 +89,23 @@ export class Hero {
       this.jumpspeed = new Vector2D(0, 0);
       this.position.y = 350
     }
+    rect(this.position.x, this.position.y, this.sizeX, this.sizeY);
+  }
+
+  public Collision(obstacle: Obstacle) {
+    if (this.position.x > obstacle.position.x + obstacle.sizeX ||
+      this.position.x + this.sizeX < obstacle.position.x ||
+      this.position.y > obstacle.position.y + obstacle.sizeY ||
+      this.position.y + this.sizeY < obstacle.position.y) {
+
+    }
+
+    else if (this.position.y + this.sizeY < obstacle.position.y) {
+      console.log("game over")
+    }
+    else if (this.position.y + this.sizeY > obstacle.position.y) {
+      this.position.y = obstacle.position.y - this.sizeY
+    }
   }
 }
+
