@@ -17,6 +17,7 @@ function draw() {
   const currentWeather = weatherProvider.getCurrentWeather();
   environment.update(currentWeather);
   environment.draw();
+  const jumpspeed = hero.jump();
 }
 
 // It will be explained later.

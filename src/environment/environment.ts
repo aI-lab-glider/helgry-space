@@ -34,6 +34,7 @@ export class Environemnt {
     else{
     this.addObstacles();
   }
+    this.obstacles.find((obstacle) => this.hero.Collision(obstacle))
   }
 
   private addObstacles() {
