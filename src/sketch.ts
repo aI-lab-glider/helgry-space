@@ -15,8 +15,11 @@ function setup() {
 function draw() {
   background(200);
   const currentWeather = weatherProvider.getCurrentWeather();
+  const heroSpeed = hero.update(currentWeather);
+  const jumpspeed = hero.jump();
   environment.update(currentWeather);
   environment.draw();
+  hero.draw();
 }
 
 // It will be explained later.
