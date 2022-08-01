@@ -56,6 +56,21 @@ export class Hero {
   }
 
 
+  public jump() {
+    this.position = this.position.add(this.jumpspeed)
+    this.jumpspeed = new Vector2D(0, 0);
+    const space = 32
+    if (keyIsDown(space) && this.position.y > 250 && this.position.y <= 400) {
+      this.jumpspeed = new Vector2D(0, -20);
+    }
+    else if (this.position.y === 350) {
+      this.jumpspeed = new Vector2D(0, 0);
+    }
+    else if (this.position.y <= 350) {
+      this.jumpspeed = new Vector2D(0, 20);
+    }
+  }
+
 
   public pickUp() { }
 
@@ -75,37 +90,20 @@ export class Hero {
     fill("blue");
     rect(this.position.x, this.position.y, 30, 30);
   }
-  jump() {
-    this.position = this.position.add(this.jumpspeed)
-    frameRate(35)
-    const space = 32
-    if (keyIsDown(space) && this.position.y === 350) {
-      this.jumpspeed = new Vector2D(0, -10);
-    }
-    else if (this.position.y < 250) {
-      this.jumpspeed = new Vector2D(0, 10);
-    }
-    else if (this.position.y > 350) {
-      this.jumpspeed = new Vector2D(0, 0);
-      this.position.y = 350
-    }
-    rect(this.position.x, this.position.y, this.sizeX, this.sizeY);
-  }
 
-  public Collision(obstacle: Obstacle) {
-    if (this.position.x > obstacle.position.x + obstacle.sizeX ||
-      this.position.x + this.sizeX < obstacle.position.x ||
-      this.position.y > obstacle.position.y + obstacle.sizeY ||
-      this.position.y + this.sizeY < obstacle.position.y) {
-
+  public doCollision(obstacle: Obstacle) {
+    if (this.position.x < obstacle.position.x + obstacle.sizeX &&
+      this.position.x + this.sizeX > obstacle.position.x &&
+      this.position.y < obstacle.position.y + obstacle.sizeY &&
+      this.position.y + this.sizeY > obstacle.position.y) {
+      if (this.position.x > obstacle.position.x && this.position.x < obstacle.position.x + obstacle.sizeX) {
+        this.position.y = obstacle.position.y - this.sizeY
+      }
+      else {
+        console.log("game over")
+      }
     }
-
-    else if (this.position.y + this.sizeY < obstacle.position.y) {
-      console.log("game over")
-    }
-    else if (this.position.y + this.sizeY > obstacle.position.y) {
-      this.position.y = obstacle.position.y - this.sizeY
-    }
+    else { }
   }
 }
 

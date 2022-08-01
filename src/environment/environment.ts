@@ -29,12 +29,10 @@ export class Environemnt {
     this.ground.update(currentWeather);
     const speed = this.hero.update(currentWeather);
     this.obstacles.forEach((obstacle) => obstacle.update(speed));
-    if(frameCount % 50){
+    if (!(frameCount % 50)) {
+      this.addObstacles()
     }
-    else{
-    this.addObstacles();
-  }
-    this.obstacles.find((obstacle) => this.hero.Collision(obstacle))
+    this.obstacles.find((obstacle) => this.hero.doCollision(obstacle))
   }
 
   private addObstacles() {
