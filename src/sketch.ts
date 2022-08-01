@@ -3,7 +3,7 @@ import { Environemnt } from "./environment/environment";
 import { WeatherProvider } from "./weather/weatherProvider";
 import { Hero } from "./hero/hero";
 
-const hero = new Hero(Environemnt.worldSizeX / 2, Environemnt.worldSizeY * 0.9);
+const hero = new Hero(Environemnt.worldSizeX / 2, Environemnt.worldSizeY - 10);
 const environment = new Environemnt(hero);
 const weatherProvider = new WeatherProvider();
 
