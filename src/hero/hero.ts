@@ -9,10 +9,8 @@ class Inventory {
 }
 
 export class Hero {
-  isHoldingGun: boolean;
   position: Vector2D;
   speed: Vector2D = new Vector2D(0, 0);
-  lookaheadRange: number;
   inventory: Inventory;
   jumpspeed: Vector2D = new Vector2D(0, 0);
   constructor(x: number, y: number) {
@@ -40,14 +38,11 @@ export class Hero {
   }
 
   calculateSpeedBasedOnKeyPressed() {
+    this.speed = new Vector2D(0, 0);
     if (keyIsDown(RIGHT_ARROW)) {
-      this.speed = new Vector2D(0, 0);
       this.speed = this.speed.add(new Vector2D(5, 0));
     } else if (keyIsDown(LEFT_ARROW)) {
-      this.speed = new Vector2D(0, 0);
       this.speed = this.speed.add(new Vector2D(-5, 0));
-    } else {
-      this.speed = new Vector2D(0, 0);
     }
   }
 
@@ -55,22 +50,19 @@ export class Hero {
     fill("blue");
     rect(this.position.x, this.position.y, 30, 30);
   }
-  jump(){
-    frameRate(50)
-    this.position = this.position.add(this.jumpspeed);
-    if (keyIsDown(32) && this.position.y > 250) {
-      this.jumpspeed = new Vector2D(0, 0);
-      this.jumpspeed = this.jumpspeed.add(new Vector2D(0, -50));
-    } 
-    else if (this.position.y === 350) {
-      this.jumpspeed = new Vector2D(0, 0);
-    } 
-    else if(keyIsDown(32) && this.position.y != 350){
-      this.jumpspeed = new Vector2D(0, 0);
+  jump() {
+    this.position = this.position.add(this.jumpspeed)
+    frameRate(35)
+    const space = 32
+    if (keyIsDown(space) && this.position.y === 350) {
+      this.jumpspeed = new Vector2D(0, -10);
     }
-    else {
+    else if (this.position.y < 250) {
+      this.jumpspeed = new Vector2D(0, 10);
+    }
+    else if (this.position.y > 350) {
       this.jumpspeed = new Vector2D(0, 0);
-      this.jumpspeed = this.jumpspeed.add(new Vector2D(0, 10));
+      this.position.y = 350
     }
   }
 }
