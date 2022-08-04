@@ -1,5 +1,6 @@
 import { Vector2D } from "../utils/vector";
 import { Weather } from "../weather/weather";
+import { Environemnt } from "environment/environment";
 import "p5";
 import { Vector } from "p5";
 
@@ -65,4 +66,9 @@ export class Hero {
       this.position.y = 350
     }
   }
+  //show() {
+  // let img = loadImage('cd/downloads/анімація1.png')
+  //imageMode(CENTER);
+  // image(img, Environemnt.worldSizeX / 2, Environemnt.worldSizeY * 0.9, 20, 20)
+  // }
 }
