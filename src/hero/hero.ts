@@ -10,9 +10,9 @@ export class Hero {
   jumpspeed: Vector2D = new Vector2D(0, 0);
   speed: Vector2D = new Vector2D(0, 0);
   public position: Vector2D;
-  public isCollision: boolean;
-  public sizeX = 5;
-  public sizeY = 10
+  public isCollision = false;
+  public sizeX = 30;
+  public sizeY = 30
   constructor(x: number, y: number) {
     this.position = new Vector2D(x, y);
   }
@@ -58,16 +58,17 @@ export class Hero {
 
   public jump() {
     this.position = this.position.add(this.jumpspeed)
-    this.jumpspeed = new Vector2D(0, 0);
+    frameRate(35)
     const space = 32
-    if (keyIsDown(space) && this.position.y > 250 && this.position.y <= 400) {
-      this.jumpspeed = new Vector2D(0, -20);
+    if (keyIsDown(space) && this.position.y === 350) {
+      this.jumpspeed = new Vector2D(0, -10);
     }
-    else if (this.position.y === 350) {
+    else if (this.position.y < 250) {
+      this.jumpspeed = new Vector2D(0, 10);
+    }
+    else if (this.position.y > 350) {
       this.jumpspeed = new Vector2D(0, 0);
-    }
-    else if (this.position.y <= 350) {
-      this.jumpspeed = new Vector2D(0, 20);
+      this.position.y = 350
     }
   }
 
@@ -91,19 +92,30 @@ export class Hero {
     rect(this.position.x, this.position.y, 30, 30);
   }
 
-  public doCollision(obstacle: Obstacle) {
-    if (this.position.x < obstacle.position.x + obstacle.sizeX &&
-      this.position.x + this.sizeX > obstacle.position.x &&
-      this.position.y < obstacle.position.y + obstacle.sizeY &&
-      this.position.y + this.sizeY > obstacle.position.y) {
-      if (this.position.x > obstacle.position.x && this.position.x < obstacle.position.x + obstacle.sizeX) {
-        this.position.y = obstacle.position.y - this.sizeY
-      }
-      else {
-        console.log("game over")
-      }
+  public collisionDetect(obstacle: Obstacle) {
+    if (this.position.x <= obstacle.position.x + obstacle.sizeX &&
+      this.position.x + this.sizeX >= obstacle.position.x &&
+      this.position.y <= obstacle.position.y + obstacle.sizeY &&
+      this.position.y + this.sizeY >= obstacle.position.y) {
+      this.isCollision = true
     }
-    else { }
+    else {
+      this.isCollision = false
+    }
+  }
+
+  public doCollision(obstacle: Obstacle) {
+
+    if (this.isCollision = true &&
+      this.position.x + this.sizeX > obstacle.position.x &&
+      this.position.x < obstacle.position.x + obstacle.sizeX) {
+      this.position.y = obstacle.position.y - this.sizeY
+    }
+    else if (this.isCollision = true &&
+      this.position.x == obstacle.position.x - this.sizeX &&
+      this.position.y > obstacle.position.y - this.sizeY) {
+      console.log('game over')
+    }
   }
 }
 

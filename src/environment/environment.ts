@@ -33,6 +33,7 @@ export class Environemnt {
       this.addObstacles()
     }
     this.obstacles.find((obstacle) => this.hero.doCollision(obstacle))
+    this.obstacles.find((obstacle) => this.hero.collisionDetect(obstacle))
   }
 
   private addObstacles() {
