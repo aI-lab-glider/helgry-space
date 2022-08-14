@@ -3,7 +3,7 @@ import { WeatherProvider } from "./weather/weatherProvider";
 import { Hero } from "./hero/hero";
 import p5 from "p5";
 
-const hero = new Hero(Environemnt.worldSizeX / 2, Environemnt.worldSizeY * 0.9);
+const hero = new Hero(Environemnt.worldSizeX / 2, Environemnt.worldSizeY - 10);
 const environment = new Environemnt(hero);
 const weatherProvider = new WeatherProvider();
 let heroSprite: p5.Image;
@@ -22,7 +22,11 @@ function draw() {
   const jumpspeed = hero.jump();
   environment.update(currentWeather);
   environment.draw();
+<<<<<<< HEAD
   hero.draw();
+=======
+  const jumpspeed = hero.jump();
+>>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
 }
 
 // It will be explained later.
