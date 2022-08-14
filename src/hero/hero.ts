@@ -4,7 +4,10 @@ import "p5";
 import { Environemnt } from "../environment/environment";
 import { Obstacle } from "../obstacle/obstacle";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
 =======
 >>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
 
@@ -12,11 +15,18 @@ export class Hero {
   //private sprite;
   jumpspeed: Vector2D = new Vector2D(0, 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
   speed: Vector2D = new Vector2D(0, 0);
   public position: Vector2D;
   public isCollision = false;
   public sizeX = 30;
   public sizeY = 30
+=======
+  public position: Vector2D;
+  public isCollision: boolean;
+  public sizeX = 5;
+  public sizeY = 10
+>>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
 =======
   public position: Vector2D;
   public isCollision: boolean;
@@ -40,6 +50,7 @@ export class Hero {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   calculateSpeedBasedOnWeather(currentWeather: Weather) {
     if (currentWeather.precipitation.isPresent() && this.speed.x !== 0) {
       this.speed = this.speed.add(new Vector2D(0, 0));
@@ -60,6 +71,10 @@ export class Hero {
   public obstacle: Obstacle
 
 >>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
+=======
+  public obstacle: Obstacle
+
+>>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
   public move(speed: Vector2D) {
     this.position = this.position.add(speed);
     if (this.position.x > Environemnt.worldSizeX) {
@@ -74,6 +89,7 @@ export class Hero {
   public jump() {
     this.position = this.position.add(this.jumpspeed)
 <<<<<<< HEAD
+<<<<<<< HEAD
     frameRate(35)
     const space = 32
     if (keyIsDown(space) && this.position.y === 350) {
@@ -86,6 +102,8 @@ export class Hero {
       this.jumpspeed = new Vector2D(0, 0);
       this.position.y = 350
 =======
+=======
+>>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
     this.jumpspeed = new Vector2D(0, 0);
     const space = 32
     if (keyIsDown(space) && this.position.y > 250 && this.position.y <= 400) {
@@ -96,6 +114,9 @@ export class Hero {
     }
     else if (this.position.y <= 350) {
       this.jumpspeed = new Vector2D(0, 20);
+<<<<<<< HEAD
+>>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
+=======
 >>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
     }
   }
@@ -117,6 +138,7 @@ export class Hero {
 
   draw() {
     fill("blue");
+<<<<<<< HEAD
 <<<<<<< HEAD
     rect(this.position.x, this.position.y, 30, 30);
   }
@@ -146,6 +168,8 @@ export class Hero {
       console.log('game over')
     }
 =======
+=======
+>>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
     rect(this.position.x, this.position.y, this.sizeX, this.sizeY);
   }
 
@@ -162,6 +186,9 @@ export class Hero {
       }
     }
     else { }
+<<<<<<< HEAD
+>>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
+=======
 >>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
   }
 }

@@ -23,7 +23,11 @@ function draw() {
   environment.update(currentWeather);
   environment.draw();
 <<<<<<< HEAD
+<<<<<<< HEAD
   hero.draw();
+=======
+  const jumpspeed = hero.jump();
+>>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
 =======
   const jumpspeed = hero.jump();
 >>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
