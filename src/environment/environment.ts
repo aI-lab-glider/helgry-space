@@ -33,13 +33,6 @@ export class Environemnt {
       this.addObstacles()
     }
     this.obstacles.find((obstacle) => this.hero.doCollision(obstacle))
-<<<<<<< HEAD
-<<<<<<< HEAD
-    this.obstacles.find((obstacle) => this.hero.collisionDetect(obstacle))
-=======
->>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
-=======
->>>>>>> 73929266859170a1692f34d14e5ed9573a8fbadd
   }
 
   private addObstacles() {
