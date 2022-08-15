@@ -2,9 +2,18 @@ import { Environemnt } from "./environment/environment";
 import { WeatherProvider } from "./weather/weatherProvider";
 import { Hero } from "./hero/hero";
 import p5 from "p5";
+import { Vector2D } from "./utils/vector";
 
-const hero = new Hero(Environemnt.worldSizeX / 2, Environemnt.worldSizeY * 0.9);
-const environment = new Environemnt(hero);
+const hero = new Hero(Environemnt.worldSizeX / 2, Environemnt.worldSizeY - 10);
+let environment = new Environemnt(hero);
+let textX = 0;
+let isGameOver = false;
+export function onGameOver() {
+  isGameOver = true;
+  environment = new Environemnt(hero);
+  textX = 0;
+}
+
 const weatherProvider = new WeatherProvider();
 let heroSprite: p5.Image;
 
@@ -23,7 +32,13 @@ function draw() {
   environment.update(currentWeather);
   environment.draw();
   hero.draw();
+  if (isGameOver) {
+    let textSpeed = -heroSpeed.x;
+    textX = textX + textSpeed;
+    text('Game over', textX, 30);
+  }
 }
+
 
 // It will be explained later.
 export { setup, draw };

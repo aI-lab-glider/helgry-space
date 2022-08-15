@@ -29,7 +29,10 @@ export class Environemnt {
     this.ground.update(currentWeather);
     const speed = this.hero.update(currentWeather);
     this.obstacles.forEach((obstacle) => obstacle.update(speed));
-    this.addObstacles();
+    if (!(frameCount % 50)) {
+      this.addObstacles()
+    }
+    this.obstacles.find((obstacle) => this.hero.doCollision(obstacle))
   }
 
   private addObstacles() {
@@ -54,5 +57,13 @@ export class Environemnt {
     this.ground.draw();
     this.obstacles.forEach((obstacle) => obstacle.draw());
     this.hero.draw();
+  }
+
+  public reset() {
+    /**
+     * change hero coordinates
+     * object on the scene should move to the start of location
+     * add some text on the screen
+     */
   }
 }
