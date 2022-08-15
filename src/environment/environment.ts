@@ -58,4 +58,12 @@ export class Environemnt {
     this.obstacles.forEach((obstacle) => obstacle.draw());
     this.hero.draw();
   }
+
+  public reset() {
+    /**
+     * change hero coordinates
+     * object on the scene should move to the start of location
+     * add some text on the screen
+     */
+  }
 }

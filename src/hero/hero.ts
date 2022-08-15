@@ -3,6 +3,7 @@ import { Weather } from "../weather/weather";
 import "p5";
 import { Environemnt } from "../environment/environment";
 import { Obstacle } from "../obstacle/obstacle";
+import { onGameOver } from "../sketch";
 
 export class Hero {
   //private sprite;
@@ -63,7 +64,7 @@ export class Hero {
     this.position = this.position.add(this.jumpspeed)
     frameRate(35)
     const space = 32
-    if (keyIsDown(space) && this.position.y === 350) {
+    if (keyIsDown(space)) {
       this.jumpspeed = new Vector2D(0, -10);
     }
     else if (this.position.y < 250) {
@@ -115,7 +116,7 @@ export class Hero {
         this.position.y = obstacle.position.y - this.sizeY
       }
       else {
-        console.log("game over")
+        onGameOver()
       }
     }
     else { }
