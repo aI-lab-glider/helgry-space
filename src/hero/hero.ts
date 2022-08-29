@@ -66,9 +66,9 @@ export class Hero {
       this.position.y = 350
     }
   }
-  //show() {
-  // let img = loadImage('cd/downloads/анімація1.png')
-  //imageMode(CENTER);
-  // image(img, Environemnt.worldSizeX / 2, Environemnt.worldSizeY * 0.9, 20, 20)
-  // }
+  preload() {
+    let img = loadImage('assets/анімація1.png')
+    imageMode(CENTER);
+    image(img, Environemnt.worldSizeX / 2, Environemnt.worldSizeY * 0.9, 20, 20)
+  }
 }
