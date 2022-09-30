@@ -57,10 +57,12 @@ export class Hero {
     if (this.position.x < 0) {
       this.position.x = Environemnt.worldSizeX;
     }
+
   }
 
 
   public jump() {
+
     this.position = this.position.add(this.jumpspeed)
     frameRate(35)
     const space = 32
@@ -92,7 +94,7 @@ export class Hero {
 
   draw() {
     fill("blue");
-    rect(this.position.x, this.position.y, 30, 30);
+    rect(this.position.x, this.position.y, this.sizeX, this.sizeY);
   }
 
   public collisionDetect(obstacle: Obstacle) {
