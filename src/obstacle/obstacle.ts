@@ -2,12 +2,12 @@ import { Vector2D } from "../utils/vector";
 
 export class Obstacle {
   public position: Vector2D;
-
   constructor(
     x: number,
     y: number,
     public sizeX: number,
     public sizeY: number
+
   ) {
     this.position = new Vector2D(x, y);
   }

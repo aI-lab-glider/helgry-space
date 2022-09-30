@@ -4,7 +4,7 @@ import { Hero } from "./hero/hero";
 import p5 from "p5";
 import { Vector2D } from "./utils/vector";
 
-const hero = new Hero(Environemnt.worldSizeX / 2, Environemnt.worldSizeY - 10);
+const hero = new Hero(Environemnt.worldSizeX / 2, Environemnt.worldSizeY * 0.9);
 let environment = new Environemnt(hero);
 let textX = 0;
 let isGameOver = false;
